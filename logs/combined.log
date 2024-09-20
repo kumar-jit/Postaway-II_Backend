@@ -61,3 +61,4 @@
 [2024-09-20 23:40:30] : "level":"error", "message":"Post not found , requestUrl : /api/posts/66ed2467e7656b800006fa8e"
 [2024-09-20 23:55:38] : "level":"error", "message":"Post not found , requestUrl : /api/posts/66edb7b3c08fa65b416b23f3"
 [2024-09-20 23:56:52] : "level":"error", "message":"PostId is require , requestUrl : /api/comments/66edbe49ae8cc9b3bba6264d"
+[2024-09-20 23:58:15] : "level":"error", "message":"You are not authorize to update the comment , requestUrl : /api/comments/66edbe49ae8cc9b3bba6264d"
