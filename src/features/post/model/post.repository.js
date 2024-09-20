@@ -1,5 +1,4 @@
-import { postModel, postSchema } from "./post.schema.js";
-import { ObjectId } from 'mongoose';
+import { postModel } from "./post.schema.js";
 
 export const createPostRepository = async (postData) => {
     return await new postModel(postData).save();
