@@ -1,6 +1,5 @@
-
-import { ErrorHandler } from "../../utils/errorHandler.js"
-import { createPostRepository, deletePostRepository, getAllPostsRepository, getPostByIdRepository, getUserPostsRepository, updatePostRepository } from "./post.repository.js"
+import { ErrorHandler } from "../../../utils/errorHandler.js"
+import { createPostRepository, deletePostRepository, getAllPostsRepository, getPostByIdRepository, getUserPostsRepository, updatePostRepository } from "../model/post.repository.js"
 
 
 export const getAllPosts = async (req, res, next) => {
