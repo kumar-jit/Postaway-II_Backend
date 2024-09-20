@@ -10,6 +10,8 @@ postRouter.route("/:postId").get(authenticateURL,getPostDetails);
 postRouter.route("/user/:userId").get(authenticateURL,getUserPosts);
 postRouter.route("/").post(authenticateURL,addPost);
 postRouter.route("/:postId").delete(authenticateURL,deletePost);
-postRouter.route("/:postId").get(authenticateURL,updatePost);
+postRouter.route("/:postId").put(authenticateURL,updatePost);
+postRouter.route("/:postId").patch(authenticateURL,updatePost);
+
 
 export default postRouter;
