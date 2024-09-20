@@ -1,7 +1,7 @@
 import express from "express";
-import { signin, signup, logout, logoutAllDevices } from "../Authentication/auth.controller.js";
-import { getAllUserDetails,getUserDetails,updateUserDetails } from "./user.controller.js";
-import authenticateURL from "../../middlewares/jwtAuthorizationMiddleware.js";
+import { signin, signup, logout, logoutAllDevices } from "../../Authentication/auth.controller.js";
+import { getAllUserDetails,getUserDetails,updateUserDetails } from "../controller/user.controller.js";
+import authenticateURL from "../../../middlewares/jwtAuthorizationMiddleware.js";
 
 const userRouter = express.Router();
 

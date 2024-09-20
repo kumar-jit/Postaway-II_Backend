@@ -1,5 +1,5 @@
 
-import { userModel, userSchema } from "../users/users.schema.js"
+import { userModel, userSchema } from "../users/model/users.schema.js"
 import { customErrorHandler } from "../../middlewares/errHandalerMiddleware.js";
 
 // user signup repository

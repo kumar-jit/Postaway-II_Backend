@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
-import userRouter from './src/features/users/users.routes.js';
+import userRouter from './src/features/users/routers/users.routes.js';
 import postRouter from './src/features/post/router/post.routes.js';
 import commetnsRouter from './src/features/comments/router/comments.routes.js';
 

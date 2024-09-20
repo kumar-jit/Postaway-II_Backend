@@ -1,5 +1,5 @@
-import { getAllUserRepository, getUserByIdRepository,updateUserRepository } from "./user.repository.js";
-import { ErrorHandler } from "../../utils/errorHandler.js";
+import { getAllUserRepository, getUserByIdRepository,updateUserRepository } from "../model/user.repository.js";
+import { ErrorHandler } from "../../../utils/errorHandler.js";
 
 export const getUserDetails = async (req,res,next) => {
     try {

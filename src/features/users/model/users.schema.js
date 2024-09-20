@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { customErrorHandler } from "../../middlewares/errHandalerMiddleware.js";
+import { customErrorHandler } from "../../../middlewares/errHandalerMiddleware.js";
 
 // schrema decleration
 export const userSchema = new mongoose.Schema(
