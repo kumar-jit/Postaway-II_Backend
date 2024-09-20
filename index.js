@@ -5,6 +5,7 @@ import cors from 'cors'
 import userRouter from './src/features/users/routers/users.routes.js';
 import postRouter from './src/features/post/router/post.routes.js';
 import commetnsRouter from './src/features/comments/router/comments.routes.js';
+import friendsManagementRouter from './src/features/users/routers/friends.routes.js';
 
 import {errorHandlerMiddleware} from './src/middlewares/errHandalerMiddleware.js';
 import { invalidRoutesHandlerMiddleware } from './src/middlewares/invalideRoutes.middleware.js';
@@ -22,6 +23,8 @@ app.use(cors());
 app.use("/api/users", userRouter);
 app.use("/api/posts",postRouter);
 app.use("/api/comments",commetnsRouter);
+app.use("/api/friends",friendsManagementRouter);
+
 
 app.use(invalidRoutesHandlerMiddleware);
 app.use(errorHandlerMiddleware);
