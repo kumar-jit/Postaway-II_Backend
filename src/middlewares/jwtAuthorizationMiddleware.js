@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { getUserByEmailAndToken } from '../features/users/user.repository.js';
+import { getUserByEmailAndToken } from '../features/users/model/user.repository.js';
 import { customErrorHandler,errorHandlerMiddleware } from './errHandalerMiddleware.js';
 import { ErrorHandler } from '../utils/errorHandler.js';
 

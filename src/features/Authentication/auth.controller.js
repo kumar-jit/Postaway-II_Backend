@@ -1,4 +1,3 @@
-import { userModel } from "../users/users.schema.js";
 import { userSignupRepository, userLoginRepository, logoutRepository,logoutAllDeviceRepossitory } from "./auth.repository.js";
 
 
