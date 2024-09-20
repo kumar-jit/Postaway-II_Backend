@@ -1,27 +1,26 @@
 import { userModel } from "./users.schema.js";
-import { customErrorHandler } from "../../middlewares/errHandalerMiddleware.js";
 
-export const getUserByIdRepository = async (userId) =>{
+export const getUserByIdRepository = async (userId, sharePassword = false) =>{
     const user = await userModel.findById(userId);
-    if(!user) {
-        throw new customErrorHandler("User not found", 404);
-    }
-    return user.toJSON();
+    if(sharePassword)
+        return user;
+    else
+        return (user)? user.toJSON() : undefined;
 }
 
-export const getAllUserRepository = async () => {
-    const users = await userModel.find({}, '-password -tokens');
-    return users;
+export const getAllUserRepository = async (sharePassword = false) => {
+    if(sharePassword)
+        return await userModel.find({});
+    else
+        return await userModel.find({}, '-password -tokens');
 }
 
-export const updateUserRepository = async(userId,userDetails) => {
+export const updateUserRepository = async(userId,userDetails, sharePassword = false) => {
     const user = await userModel.findByIdAndUpdate(userId, userDetails, {new: true});
-    if(!user){
-        throw new customErrorHandler("User not found", 404);
-    }
-    else{
-        return user.toJSON();
-    }
+    if(sharePassword)
+        return user;
+    else
+        return (user)? user.toJSON() : undefined;
 }
 
 

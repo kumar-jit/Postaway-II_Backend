@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import userRouter from './src/features/users/users.routes.js';
-import {globalErrorHandaler} from './src/middlewares/errHandalerMiddleware.js';
+import {errorHandlerMiddleware} from './src/middlewares/errHandalerMiddleware.js';
 import { invalidRoutesHandlerMiddleware } from './src/middlewares/invalideRoutes.middleware.js';
 import postRouter from './src/features/post/post.routes.js';
 // configure env file
@@ -21,6 +21,6 @@ app.use("/api/posts",postRouter);
 
 
 app.use(invalidRoutesHandlerMiddleware);
-app.use(globalErrorHandaler);
+app.use(errorHandlerMiddleware);
 
 
