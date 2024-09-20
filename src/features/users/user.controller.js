@@ -1,22 +1,14 @@
 import { getAllUserRepository, getUserByIdRepository,updateUserRepository } from "./user.repository.js";
-import { customErrorHandler } from "../../middlewares/errHandalerMiddleware.js";
-
-export const getUserData = (req,res, next) => {
-    try{
-        console.log(req);
-        res.send("test");
-    }
-    catch(error){
-        next(error)
-    }
-    
-}
+import { ErrorHandler } from "../../utils/errorHandler.js";
 
 export const getUserDetails = async (req,res,next) => {
     try {
         const userId = req.params.userId;
         const user = await getUserByIdRepository(userId);
-        res.status(200).json(user);
+        if(!user) {
+            return next(new ErrorHandler(404, "User not found"));
+        }
+        return res.status(200).json(user);
     } catch (error) {
         next(error);
     }
@@ -27,7 +19,7 @@ export const getAllUserDetails = async (req,res,next) => {
         const users = await  getAllUserRepository();
         res.status(200).json(users);
     } catch (error) {
-        next(error);
+        next(new ErrorHandler(500, error));
     }
 }
 
@@ -37,12 +29,15 @@ export const updateUserDetails = async (req,res,next) => {
         const userInformation = req.body;
         if(userId == req.userId ){
             const user = await updateUserRepository(userId,userInformation);
-            res.status(200).json(user);
+            if(user)
+                res.status(200).json(user);
+            else
+                return next(new ErrorHandler(404, "User not found"));
         }
         else
-            throw new customErrorHandler("You are not authorize to update this information", 401);  // checks only loging user can own informations
+           return next(new ErrorHandler(403, "You do not have permission to update this user's information"))
         
     } catch (error) {
-        next(error);
+        next(new ErrorHandler(500, error));
     }
 }

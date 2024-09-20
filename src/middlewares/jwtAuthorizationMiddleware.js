@@ -1,16 +1,17 @@
 import jwt from 'jsonwebtoken';
 import { getUserByEmailAndToken } from '../features/users/user.repository.js';
-import { customErrorHandler,globalErrorHandaler } from './errHandalerMiddleware.js';
+import { customErrorHandler,errorHandlerMiddleware } from './errHandalerMiddleware.js';
+import { ErrorHandler } from '../utils/errorHandler.js';
 
 export const authenticateURL = async (req, res, next) => {
     try {
         const jwtToken = req.headers.authorization.substring(7);
         if(!jwtToken){
-            return res.status(401).json({message: 'Unauthorized! Please login again'});
+            return next(new ErrorHandler(403, 'Unauthorized! Please login again'))
         }
         const screatKey = process.env.JWT_SECRET;
         jwt.verify(jwtToken, screatKey, async (err, decoded) => {
-            if (err) res.status(401).json({ success: false, msg: "Faild to login! Please try again" });
+            if (err) return next(new ErrorHandler(401, "Not a valid session"))
             else {
                 const userPayload = decoded;
                 req.userId = userPayload._id;
@@ -18,14 +19,14 @@ export const authenticateURL = async (req, res, next) => {
                 req.jwtToken = jwtToken;
                 let userMetadata = await getUserByEmailAndToken(userPayload.email, jwtToken);
                 if (!userMetadata) {
-                    return res.status(401).json({message: 'Please login again!'});
+                    return next(new ErrorHandler(401, "Please provide valid email and password"));
                 }
                 next();
             }
         })
     } catch (error) {
         // next(error);
-        globalErrorHandaler(error, req, res, next);
+        errorHandlerMiddleware(error, req, res, next);
     }
 }
 

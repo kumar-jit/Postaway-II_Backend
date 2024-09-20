@@ -4,17 +4,11 @@ import { customErrorHandler } from "../../middlewares/errHandalerMiddleware.js";
 
 // user signup repository
 export const userSignupRepository = async (userData) =>{
-    try {
-        const newUser = new userModel(userData);
-        await newUser.encryptPassword();
-        await newUser.save();
-        return { success: true, res: newUser.toJSON() };
-    } catch (error) {
-        if(error instanceof customErrorHandler){
-            throw new customErrorHandler(error.message,error.status);
-        }
-        return { success: false, error: { statusCode: 400, msg: error.message } };
-    }
+
+    const newUser = new userModel(userData);
+    await newUser.encryptPassword();
+    await newUser.save();
+    return { success: true, res: newUser.toJSON() };
 }
 
 // user login repo

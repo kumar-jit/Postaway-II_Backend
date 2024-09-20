@@ -17,3 +17,4 @@ userRouter.route("/update-details/:userId").put(authenticateURL, updateUserDetai
 
 // userRouter.route("/test").get(authenticateURL,getUserData);
 export default userRouter;
+

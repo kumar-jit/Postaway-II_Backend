@@ -1,27 +1,26 @@
 import { postModel, postSchema } from "./post.schema.js";
-import { userModel, userSchema } from "../users/users.schema.js";
 
 
-export const createPost = async (postData) => {
+export const createPostRepository = async (postData) => {
     return await new postModel(postData).save();
 }
 
-export const getAllPosts = async () => {
+export const getAllPostsRepository = async () => {
     return await postModel.find(); 
 }
 
-export const getPostById = async (postId) => {
+export const getPostByIdRepository = async (postId) => {
     return await postModel.findById(postId).populate('user').populate('comments').populate('likes');
 }
 
-export const getUserPosts = async (userId) => {
+export const getUserPostsRepository = async (userId) => {
     return await postModel.find({owner: new ObjectId(userId)});
 }
 
-export const updatePost = async (postId, newData) => {
+export const updatePostRepository = async (postId, newData) => {
     return await postModel.findByIdAndUpdate(postId, newData, {new: true});
 }
 
-export const deletePost = async (postId) => {
+export const deletePostRepository = async (postId) => {
     return await postModel.findByIdAndDelete(postId);
 }
