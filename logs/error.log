@@ -15,3 +15,5 @@
 [2024-09-19 02:12:19] : "level":"error", "message":""
 [2024-09-19 02:12:57] : "level":"error", "message":""
 [2024-09-19 02:13:41] : "level":"error", "message":"You are not authorize to update this information , requestUrl : /api/users/update-details/66e88d0e1615da8fecc87617"
+[2024-09-20 11:19:38] : "level":"error", "message":"Not a valid session , requestUrl : /api/users/get-details/66e88343716e97a39c2c3dbb"
+[2024-09-20 11:58:08] : "level":"error", "message":"E11000 duplicate key error collection: postaway2.users index: email_1 dup key: { email: "kumar1@gmail.com" } , requestUrl : /api/users/signup"

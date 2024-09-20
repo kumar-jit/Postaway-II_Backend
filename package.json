@@ -18,5 +18,8 @@
     "mongoose": "^8.6.2",
     "postaway": "file:",
     "winston": "^3.14.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.6"
   }
 }
