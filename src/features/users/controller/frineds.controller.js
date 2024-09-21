@@ -133,7 +133,6 @@ export const toggoleFriendship = async (req, res, next) =>{
  * @param {Object} res - Express response object
  * @param {Function} next - Express middleware function
  */
-expo
 export const respondToFriendRequest = async (req, res, next) => {
     try{
         const friendId = req.params.friendId;
