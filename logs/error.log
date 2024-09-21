@@ -77,3 +77,4 @@
 [2024-09-21 03:36:44] : "level":"error", "message":"Somthing wrong , requestUrl : /api/friends/toggle-friendship/66edd3a0677090467805cbb3"
 [2024-09-21 03:37:37] : "level":"error", "message":"Please select proper status , requestUrl : /api/friends/toggle-friendship/66edd3a0677090467805cbb3"
 [2024-09-21 03:37:46] : "level":"error", "message":"Friend request alread sended , requestUrl : /api/friends/toggle-friendship/66edd3a0677090467805cbb3"
+[2024-09-21 03:41:27] : "level":"error", "message":"This action not possible. you are not friend , requestUrl : /api/friends/toggle-friendship/66edd3a0677090467805cbb3"
