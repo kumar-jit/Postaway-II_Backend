@@ -22,8 +22,8 @@ export const userSchema = new mongoose.Schema(
         friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true},
         status: {
           type: String,
-          enum: ["Pending", "Rejected", "Accepted"],
-          default: "Pending",
+          enum: ["ReceiveRequest", "SendRequest", "Friend"],
+          default: "ReceiveRequest",
         },
       },
     ],
