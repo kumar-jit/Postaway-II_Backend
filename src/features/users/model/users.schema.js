@@ -17,14 +17,13 @@ export const userSchema = new mongoose.Schema(
     password: { type: String, required: true, minlength: 2 },
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
     avatar: { type: String }, // URL for user avatar
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    friendRequests: [
+    friends: [
       {
-        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true},
         status: {
           type: String,
-          enum: ["Pending", "Rejected"],
-          default: "Pending",
+          enum: ["ReceiveRequest", "SendRequest", "Friend"],
+          default: "ReceiveRequest",
         },
       },
     ],
@@ -64,6 +63,10 @@ userSchema.methods.toJSON = function() {
   delete user.password;
   delete user.tokens;
   return user;
+}
+
+userSchema.methods.checkFriendshipStatus = function(friendId) {
+    return this.friends.find( friend => friend.friendId == friendId);
 }
 
 export const userModel = mongoose.model("User", userSchema);
