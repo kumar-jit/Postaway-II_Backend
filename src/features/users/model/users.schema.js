@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { customErrorHandler } from "../../../middlewares/errHandalerMiddleware.js";
+import { ErrorHandler } from "../../../utils/errorHandler.js";
 
 // schrema decleration
 export const userSchema = new mongoose.Schema(
@@ -27,7 +28,9 @@ export const userSchema = new mongoose.Schema(
         },
       },
     ],
-    tokens: [{ token: { type: String } }]
+    tokens: [{ token: { type: String } }],
+    otp: { type: String },
+    otpExpiry: { type: Date }
   },
   { timestamps: true }
 );
@@ -44,6 +47,16 @@ userSchema.methods.generateAuthToken = async function() {
   }
 };
 
+userSchema.method.generateOtp = async function(otp) {
+    try {
+        const token = jwt.sign({ otp: otp, email: this.email }, process.env.JWT_SECRET);
+        this.tokens = this.tokens.concat({token});
+        await this.save();
+        return token;
+    } catch (error) {
+        throw new ErrorHandler(500, error);
+    }
+}
 // Password validation method
 userSchema.methods.isPasswordMatch = async function(password) {
   return bcrypt.compare(password, this.password);
@@ -62,6 +75,7 @@ userSchema.methods.toJSON = function() {
   const user = this.toObject();
   delete user.password;
   delete user.tokens;
+  delete user.otp;
   return user;
 }
 
