@@ -20,7 +20,7 @@ export const authenticateURL = async (req, res, next) => {
                 req.jwtToken = jwtToken;
                 let userMetadata = await getUserByEmailAndToken(userPayload.email, jwtToken);
                 if (!userMetadata) {
-                    return next(new ErrorHandler(401, "Please provide valid email and password"));
+                    return next(new ErrorHandler(401, "Not a valid session. Please login again"));
                 }
                 next();
             }

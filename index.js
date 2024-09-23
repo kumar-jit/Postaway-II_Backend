@@ -7,6 +7,7 @@ import postRouter from './src/features/post/router/post.routes.js';
 import commetnsRouter from './src/features/comments/router/comments.routes.js';
 import friendsManagementRouter from './src/features/users/routers/friends.routes.js';
 import likesRouter from './src/features/post/router/likes.routes.js';
+import resetInfoRouter from './src/features/users/routers/resetInfo.routes.js';
 
 import {errorHandlerMiddleware} from './src/middlewares/errHandalerMiddleware.js';
 import { invalidRoutesHandlerMiddleware } from './src/middlewares/invalideRoutes.middleware.js';
@@ -25,7 +26,8 @@ app.use("/api/users", userRouter);
 app.use("/api/posts",postRouter);
 app.use("/api/comments",commetnsRouter);
 app.use("/api/friends",friendsManagementRouter);
-app.use("/api/likes/",likesRouter);
+app.use("/api/likes",likesRouter);
+app.use("/api/otp",resetInfoRouter);
 
 app.use(invalidRoutesHandlerMiddleware);
 app.use(errorHandlerMiddleware);
