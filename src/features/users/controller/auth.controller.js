@@ -1,7 +1,7 @@
-import { ErrorHandler } from "../../utils/errorHandler.js";
-import { getUserByEmailRepository } from "../users/model/user.repository.js";
+import { ErrorHandler } from "../../../utils/errorHandler.js";
+import { getUserByEmailRepository } from "../model/user.repository.js";
 
-import { userSignupRepository, userLoginRepository, logoutRepository,logoutAllDeviceRepossitory } from "./auth.repository.js";
+import { userSignupRepository, userLoginRepository, logoutRepository,logoutAllDeviceRepossitory } from "../model/auth.repository.js";
 
 
 export const signup = async (req,res,next) => {

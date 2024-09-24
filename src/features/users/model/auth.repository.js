@@ -1,5 +1,5 @@
 
-import { userModel } from "../users/model/users.schema.js"
+import { userModel } from "./users.schema.js"
 
 // user signup repository
 export const userSignupRepository = async (userData) =>{
