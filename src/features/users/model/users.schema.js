@@ -20,7 +20,7 @@ export const userSchema = new mongoose.Schema(
     avatar: { type: String }, // URL for user avatar
     friends: [
       {
-        friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true},
+        friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
         status: {
           type: String,
           enum: ["ReceiveRequest", "SendRequest", "Friend"],
@@ -82,5 +82,8 @@ userSchema.methods.toJSON = function() {
 userSchema.methods.checkFriendshipStatus = function(friendId) {
     return this.friends.find( friend => friend.friendId == friendId);
 }
+
+// making unique id for friends
+userSchema.index({ "friends.friendId": 1 }, { unique: true, partialFilterExpression: { "friends.friendId": { $exists: true, $ne: null } } });
 
 export const userModel = mongoose.model("User", userSchema);
