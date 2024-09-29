@@ -46,7 +46,7 @@ export const addPost = async (req, res, next) => {
         const postData = {
             caption: caption,
             image: image || "",
-            owner: owner || req.userId
+            owner: owner || req.user._id.toString()
         }
         const post = await createPostRepository(postData);
         return res.status(201).json(post);

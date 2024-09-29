@@ -15,7 +15,7 @@ export const getAllcomments = async (req,res,next) => {
 
 export const addComment = async (req,res,next) => {
     try {
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         const {comment} = req.body;
         if(comment === undefined || comment.trim().length == 0)
             return next(new ErrorHandler(400,"Comment is required"));
@@ -37,7 +37,7 @@ export const deleteComment = async (req,res,next) => {
         const  commentId = req.params.commentId;
         if(!commentId) return next(new ErrorHandler(400, "Comment ID is required"));
 
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         const comment = await getCommentByCommentIdRepository(commentId);
         if(!comment) return next(new ErrorHandler(400,"Comment no longer availabe"));
 
@@ -65,7 +65,7 @@ export const updateComment = async (req,res,next) => {
 
         if(!commentId) return next(new ErrorHandler(400, "Comment ID is required"));     // parameter check
 
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         const comment = await getCommentByCommentIdRepository(commentId); // get thec comment to verify user
         if(!comment) return next(new ErrorHandler(400,"Comment no longer availabe"));
 

@@ -17,8 +17,8 @@ export const authenticateURL = async (req, res, next) => {
             if (err) return next(new ErrorHandler(401, "Not a valid session"))
             else {
                 const userPayload = decoded;
-                req.userId = userPayload._id;
-                req.userEmail = userPayload.email;
+                // req.user._id.toString() = userPayload._id;
+                // req.user.email = userPayload.email;
                 req.jwtToken = jwtToken;
 
                 let userMetadata = redisServer.getUserByEmailAndToken(userPayload.email, jwtToken);
