@@ -18,7 +18,7 @@ export const sendOTP = async(req,res,next) => {
         const updatedUser = await saveOTPRepository(user);
         if(!updatedUser) return next(new ErrorHandler(500,"Something went wrong. Please try again later."));
 
-        sendMail(updatedUser.name, updatedUser.email, updatedUser.otp);
+        sendMail(updatedUser.name, updatedUser.email, updatedUser.otp, "password");
 
         return res.status(200).send({status:true,msg:"Please check your email for the OTP"})
     }
@@ -82,6 +82,9 @@ export const resetPassword = async(req,res,next) => {
       }
 }
 
+export const sendOtpForEmail = async (req,res,next) => {
+    
+}
 export const changeEmail = async(req,res,next) => {
     
 }

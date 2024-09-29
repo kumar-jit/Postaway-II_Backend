@@ -1,0 +1,572 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Postaway",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "users"
+    },
+    {
+      "name": "Posts"
+    },
+    {
+      "name": "Comments"
+    },
+    {
+      "name": "Likes"
+    },
+    {
+      "name": "Friendship"
+    },
+    {
+      "name": "OTP"
+    }
+  ],
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": ["users"],
+        "summary": "signup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "name": "jit199",
+                  "email": "jitmaity199@gmail.com",
+                  "password": "123",
+                  "gender": "Male",
+                  "avatar": ""
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/signin": {
+      "post": {
+        "tags": ["users"],
+        "summary": "signin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jitmaity19@gmail.com",
+                  "password": "123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "post": {
+        "tags": ["users"],
+        "summary": "logout",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/logout-all-devices": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Logout All Devices",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/get-details/66e88343716e97a39c2c3dbb": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get User Details",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/get-all-details": {
+      "get": {
+        "tags": ["users"],
+        "summary": "Get All User Details",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/users/update-details/66edb7b3c08fa65b416b23f3": {
+      "put": {
+        "tags": ["users"],
+        "summary": "Update User Details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "gender": "Female"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/all": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get All Posts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/66edb7b3c08fa65b416b23f3": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get Post by ID",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/user/66e88343716e97a39c2c3dbb": {
+      "get": {
+        "tags": ["Posts"],
+        "summary": "Get User Posts",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts": {
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Create Post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "caption": "Hi this is my secoend post"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/66ed2467e7656b800006fa8e": {
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete Post",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/posts/66edb81cc08fa65b416b2405": {
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update Post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "caption": "Hi! whats up"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/66ed15cd45074820f1a7b821": {
+      "get": {
+        "tags": ["Comments"],
+        "summary": "Get Comments",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/66ed15e845074820f1a7b826": {
+      "post": {
+        "tags": ["Comments"],
+        "summary": "Add Comment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "comment": "hi, all"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/66edb8f2c08fa65b416b241d": {
+      "delete": {
+        "tags": ["Comments"],
+        "summary": "Delete Comment",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/comments/66edbe49ae8cc9b3bba6264d": {
+      "put": {
+        "tags": ["Comments"],
+        "summary": "Update Comment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "comment": "update comment"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/likes/66ed15e845074820f1a7b826": {
+      "get": {
+        "tags": ["Likes"],
+        "summary": "Get Likes",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/likes/toggle/66ed15e845074820f1a7b826": {
+      "post": {
+        "tags": ["Likes"],
+        "summary": "Toggle Like",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friends/get-friends/66edb7aac08fa65b416b23f1": {
+      "get": {
+        "tags": ["Friendship"],
+        "summary": "Get Friends",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friends/get-pending-requests": {
+      "get": {
+        "tags": ["Friendship"],
+        "summary": "Get Pending Requests",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friends/toggle-friendship/66edd3a0677090467805cbb3": {
+      "post": {
+        "tags": ["Friendship"],
+        "summary": "Toggle Friendship",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "status": "request"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friends/response-to-request/66e88343716e97a39c2c3dbb": {
+      "post": {
+        "tags": ["Friendship"],
+        "summary": "Respond to Friend Request",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "status": "confirm"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/send": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Send OTP",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jitmaity9@gmail.com"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/verify": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Verify OTP",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jitmaity9@gmail.com",
+                  "otp": 818939
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/reset-password": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Reset Password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "email": "jitmaity9@gmail.com",
+                  "otp": 834996,
+                  "newPassword": "1234"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
