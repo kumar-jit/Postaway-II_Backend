@@ -28,7 +28,7 @@ export const toggleLikes = async (req,res,next) => {
         const postId = req.params.postId;
         if(!postId) return next(new ErrorHandler(400, "PostId is required"));
 
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         if(!userId) return next(new ErrorHandler(403, "Please login first"));
 
         const post = await getPostByIdRepository(postId);

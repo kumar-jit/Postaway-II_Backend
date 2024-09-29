@@ -56,7 +56,7 @@ export const signin = async (req,res,next) =>{
 
 export const logout = async (req,res,next) =>{
     try {
-        const userId = req.userId,
+        const userId = req.user._id.toString(),
               token = req.jwtToken;
         
         // check login status
@@ -76,7 +76,7 @@ export const logout = async (req,res,next) =>{
 
 export const logoutAllDevices = async(req,res,next) => {
     try {
-        const userId = req.userId,
+        const userId = req.user._id.toString(),
               token = req.jwtToken;
 
         // check login status

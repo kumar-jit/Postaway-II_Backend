@@ -34,7 +34,7 @@ export const updateUserDetails = async (req,res,next) => {
                 delete userInformation[key];  
         }
 
-        if(userId == req.userId ){
+        if(userId == req.user._id.toString() ){
             const user = await updateUserRepository(userId,userInformation);
             if(user)
                 res.status(200).json(user);

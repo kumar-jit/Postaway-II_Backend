@@ -27,7 +27,7 @@ export const getFriends = async (req, res, next) => {
  */
 export const getPendingRequest = async (req, res, next ) => {
     try {
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         if(!userId) return next(new ErrorHandler(403, "Please login first"));
 
         const user = await getPendingRequestRepository(userId);
@@ -45,7 +45,7 @@ export const getPendingRequest = async (req, res, next ) => {
  */
 export const toggoleFriendship = async (req, res, next) =>{
     try{
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         const friendId = req.params.friendId;
         const status = req.body.status;
 
@@ -136,7 +136,7 @@ export const toggoleFriendship = async (req, res, next) =>{
 export const respondToFriendRequest = async (req, res, next) => {
     try{
         const friendId = req.params.friendId;
-        const userId = req.userId;
+        const userId = req.user._id.toString();
         const status = req.body.status;
 
         // Ensure a valid friendship status is provided
