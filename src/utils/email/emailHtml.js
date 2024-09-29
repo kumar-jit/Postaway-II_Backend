@@ -1,5 +1,5 @@
 const date = new Date();
-const getHtmlCode = (name,otp) =>{
+const getHtmlCode = (name,otp,changeType) =>{
     return `<!DOCTYPE html>
     <html lang="en">
       <head>
@@ -90,8 +90,8 @@ const getHtmlCode = (name,otp) =>{
                     letter-spacing: 0.56px;
                   "
                 >
-                  We received a request to reset your password for your account.
-                  Please use the One-Time Password (OTP) below to reset your password:
+                  We received a request to change your ${changeType} for your account.
+                  Please use the One-Time Password (OTP) below to change your ${changeType}:
                 </p>
                 <p
                   style="
@@ -114,7 +114,7 @@ const getHtmlCode = (name,otp) =>{
                   "
                 >
                   This OTP is valid for the next <span style="font-weight: 600; color: #1f1f1f;">10 minutes</span>.
-                   If you did not request a password reset, please ignore this email, and your account will remain secure.
+                   If you did not request a ${changeType} change, please ignore this email, and your account will remain secure.
                 </p>
               </div>
             </div>

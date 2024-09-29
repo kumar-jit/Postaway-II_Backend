@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import swaggerUi from 'swagger-ui-express'
 
 import userRouter from './src/features/users/routers/users.routes.js';
 import postRouter from './src/features/post/router/post.routes.js';
@@ -9,8 +10,12 @@ import friendsManagementRouter from './src/features/users/routers/friends.routes
 import likesRouter from './src/features/post/router/likes.routes.js';
 import resetInfoRouter from './src/features/users/routers/resetInfo.routes.js';
 
-import {errorHandlerMiddleware} from './src/middlewares/errHandalerMiddleware.js';
+import { errorHandlerMiddleware } from './src/middlewares/errHandalerMiddleware.js';
 import { invalidRoutesHandlerMiddleware } from './src/middlewares/invalideRoutes.middleware.js';
+
+import apiDocs from './swaggerDocument.json' assert {type: 'json'}
+
+
 
 // configure env file
 dotenv.config();
@@ -19,7 +24,21 @@ export const app = express();
 
 // for json body reader
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  }));
+
+// api docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs));
 
 // all HTTP controller
 app.use("/api/users", userRouter);

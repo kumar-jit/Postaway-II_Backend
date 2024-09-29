@@ -27,6 +27,13 @@ export const updateUserDetails = async (req,res,next) => {
     try {
         const userId = req.params.userId;
         const userInformation = req.body;
+
+        // deleteing unnacessary data
+        for (var key in userInformation) {
+            if(!["name","gender","avatar"].includes(key))
+                delete userInformation[key];  
+        }
+
         if(userId == req.userId ){
             const user = await updateUserRepository(userId,userInformation);
             if(user)

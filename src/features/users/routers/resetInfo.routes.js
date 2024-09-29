@@ -10,6 +10,10 @@ const resetInfoRouter = express.Router();
 resetInfoRouter.route("/send").post(sendOTP);
 resetInfoRouter.route("/verify").post(verifyOTP);
 resetInfoRouter.route("/reset-password").post(resetPassword);
+
+// addtional features
+resetInfoRouter.route("/send-email").post(authenticateURL, changeEmail);
+resetInfoRouter.route("/verify-email").post(authenticateURL, changeEmail);
 resetInfoRouter.route("/change-email").post(authenticateURL, changeEmail);
 
 
