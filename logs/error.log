@@ -121,3 +121,4 @@
 [2024-09-29 20:46:58] : "level":"error", "message":"No account found with this email. Please sign up.  , requestUrl : /api/users/signin"
 [2024-09-29 20:47:34] : "level":"error", "message":"No account found with this email. Please sign up.  , requestUrl : /api/users/signin"
 [2024-09-29 22:08:58] : "level":"error", "message":"You do not have permission to update this user's information , requestUrl : /api/users/update-details/66f2cb03f37302c411d3730a"
+[2024-09-30 01:01:51] : "level":"error", "message":"Post not found , requestUrl : /api/likes/toggle/66edb8f2c08fa65b416b241d"
