@@ -12,8 +12,11 @@ export const getFriends = async (req, res, next) => {
     try {
         const userId = req.params.userId;
         if(!userId) return next(new ErrorHandler(400, "User ID required."));
+
         const user = await getFriendsRepository(userId);
-        res.status(200).json(user.friends);
+        if(!user) return next(new ErrorHandler(404, "User not found."));
+
+        res.status(200).json(user[0].friendDetails);
     } catch (error) {
         next(error);
     }
@@ -29,9 +32,11 @@ export const getPendingRequest = async (req, res, next ) => {
     try {
         const userId = req.user._id.toString();
         if(!userId) return next(new ErrorHandler(403, "Please login first"));
-
+        
         const user = await getPendingRequestRepository(userId);
-        res.status(200).json(user.friends);
+        if(!user) return next(new ErrorHandler(404, "User not found."));
+        
+        res.status(200).json(user[0].friendDetails);
     } catch (error) {
         next(error);
     }

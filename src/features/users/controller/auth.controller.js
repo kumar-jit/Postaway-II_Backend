@@ -62,7 +62,7 @@ export const logout = async (req,res,next) =>{
         // check login status
         if(!userId) return res.status(200).json({message:"Already logged out successfully!"});
 
-        const result = await logoutRepository(userId,token);
+        const result = await logoutRepository(userId,token, req.user.email);
         if(!result) return next(new ErrorHandler(500,"Something went wrong"));
 
         res.status(200).json({message:"Logout successful!" })
@@ -82,7 +82,7 @@ export const logoutAllDevices = async(req,res,next) => {
         // check login status
         if(!userId) return res.status(200).json({message:"Already logged out successfully!"});
 
-        const result = await logoutAllDeviceRepossitory(userId,token);
+        const result = await logoutAllDeviceRepossitory(userId, req.user.email);
         if(!result) return next(new ErrorHandler(500,"Something went wrong."));
 
         res.status(200).json({message:"Logout successful from all devices!" })

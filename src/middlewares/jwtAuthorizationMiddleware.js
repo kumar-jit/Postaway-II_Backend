@@ -21,19 +21,23 @@ export const authenticateURL = async (req, res, next) => {
                 // req.user.email = userPayload.email;
                 req.jwtToken = jwtToken;
 
+                // check redis in cache
                 let userMetadata = redisServer.getUserByEmailAndToken(userPayload.email, jwtToken);
+                // check in data base
                 if (!userMetadata) {
                     const userRawDetails = await getUserByEmailAndToken(userPayload.email, jwtToken);
-                    userMetadata = userRawDetails.toObject();
-
-                    redisServer.saveUserByEmail(userPayload.email, userMetadata);
+                    if(userRawDetails){
+                        userMetadata = userRawDetails.toObject();
+                        redisServer.saveUserByEmail(userPayload.email, userMetadata);
+                    } 
                 }
-                req.user = userMetadata;
 
-                // let userMetadata = await getUserByEmailAndToken(userPayload.email, jwtToken);
                 if (!userMetadata) {
                     return next(new ErrorHandler(401, "Not a valid session. Please login again"));
                 }
+
+                req.user = userMetadata;
+
                 next();
             }
         })

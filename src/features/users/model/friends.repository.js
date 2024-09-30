@@ -1,25 +1,84 @@
 import { userModel } from "./users.schema.js";
 import mongoose from "mongoose";
 
-
 export const getFriendsRepository = async(userId) =>{
-    return await userModel.findById(userId)
-    .select('friends')
-    .populate({
-        path:'friends.friendId',
-        match:{'friends.status': 'Friend'},
-        select:'name email avatar'
-    });
+    const userWithFilteredFriends = await userModel.aggregate([
+        // Match the user by ID
+        { $match: { _id: new mongoose.Types.ObjectId(userId) } },
+        
+        // Project and filter the friends array where status is "Friend"
+        {
+          $project: {
+            friends: {
+              $filter: {
+                input: "$friends",
+                as: "friend",
+                cond: { $eq: ["$$friend.status", "Friend"] }
+              }
+            }
+          }
+        },
+        
+        // Perform a lookup to populate the friendId field from the User collection
+        {
+          $lookup: {
+            from: "users",             
+            localField: "friends.friendId", 
+            foreignField: "_id",        
+            as: "friendDetails"         // alias for the populated data
+          }
+        },
+        
+        {
+          $project: {
+            "friendDetails.name": 1,
+            "friendDetails.email": 1,
+            "friendDetails.avatar": 1
+          }
+        }
+    ]);
+
+    return userWithFilteredFriends;
 }
 
 export const getPendingRequestRepository = async(userId) => {
-    return await userModel.findById(userId)
-    .select('friends')
-    .populate({
-        path:'friends.friendId',
-        match:{'friends.status': 'ReceiveRequest'},
-        select:'name email avatar'
-    });
+    const userWithFilteredFriends = await userModel.aggregate([
+        // Match the user by ID
+        { $match: { _id: new mongoose.Types.ObjectId(userId) } },
+        
+        // Project and filter the friends array where status is "Friend"
+        {
+          $project: {
+            friends: {
+              $filter: {
+                input: "$friends",
+                as: "friend",
+                cond: { $eq: ["$$friend.status", "ReceiveRequest"] }
+              }
+            }
+          }
+        },
+        
+        // Perform a lookup to populate the friendId field from the User collection
+        {
+          $lookup: {
+            from: "users",             
+            localField: "friends.friendId", 
+            foreignField: "_id",        
+            as: "friendDetails"         // alias for the populated data
+          }
+        },
+
+        {
+          $project: {
+            "friendDetails.name": 1,
+            "friendDetails.email": 1,
+            "friendDetails.avatar": 1
+          }
+        }
+    ]);
+
+    return userWithFilteredFriends;
 }
 
 export const handleFriendRequestRepository = async (senderUser, receiverUser, action = 'update') => {

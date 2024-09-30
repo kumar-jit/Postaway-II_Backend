@@ -53,8 +53,8 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "name": "jit199",
-                  "email": "jitmaity199@gmail.com",
+                  "name": "jit9",
+                  "email": "jitmaity9@gmail.com",
                   "password": "123",
                   "gender": "Male",
                   "avatar": ""
@@ -83,8 +83,8 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "email": "jitmaity19@gmail.com",
-                  "password": "123"
+                  "email": "jitmaity9@gmail.com",
+                  "password": "1234"
                 }
               }
             }
@@ -134,10 +134,20 @@
         }
       }
     },
-    "/api/users/get-details/66e88343716e97a39c2c3dbb": {
+    "/api/users/get-details/{userId}": {
       "get": {
         "tags": ["users"],
         "summary": "Get User Details",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -162,7 +172,7 @@
         }
       }
     },
-    "/api/users/update-details/66edb7b3c08fa65b416b23f3": {
+    "/api/users/update-details/{userId}": {
       "put": {
         "tags": ["users"],
         "summary": "Update User Details",
@@ -172,12 +182,24 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "gender": "Female"
+                  "name": "jit9",
+                  "gender": "Male",
+                  "avatar": ""
                 }
               }
             }
           }
         },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -202,10 +224,76 @@
         }
       }
     },
-    "/api/posts/66edb7b3c08fa65b416b23f3": {
+    "/api/posts/{postId}": {
       "get": {
         "tags": ["Posts"],
         "summary": "Get Post by ID",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Posts"],
+        "summary": "Delete Post",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Posts"],
+        "summary": "Update Post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "caption": "Hi! whats up"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -216,10 +304,20 @@
         }
       }
     },
-    "/api/posts/user/66e88343716e97a39c2c3dbb": {
+    "/api/posts/user/{userId}": {
       "get": {
         "tags": ["Posts"],
         "summary": "Get User Posts",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -256,50 +354,20 @@
         }
       }
     },
-    "/api/posts/66ed2467e7656b800006fa8e": {
-      "delete": {
-        "tags": ["Posts"],
-        "summary": "Delete Post",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/posts/66edb81cc08fa65b416b2405": {
-      "put": {
-        "tags": ["Posts"],
-        "summary": "Update Post",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "caption": "Hi! whats up"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/comments/66ed15cd45074820f1a7b821": {
+    "/api/comments/{postId}": {
       "get": {
         "tags": ["Comments"],
         "summary": "Get Comments",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -308,9 +376,7 @@
             }
           }
         }
-      }
-    },
-    "/api/comments/66ed15e845074820f1a7b826": {
+      },
       "post": {
         "tags": ["Comments"],
         "summary": "Add Comment",
@@ -326,6 +392,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -336,10 +412,20 @@
         }
       }
     },
-    "/api/comments/66edb8f2c08fa65b416b241d": {
+    "/api/comments/{commentId}": {
       "delete": {
         "tags": ["Comments"],
         "summary": "Delete Comment",
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -348,9 +434,7 @@
             }
           }
         }
-      }
-    },
-    "/api/comments/66edbe49ae8cc9b3bba6264d": {
+      },
       "put": {
         "tags": ["Comments"],
         "summary": "Update Comment",
@@ -366,6 +450,16 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -376,10 +470,20 @@
         }
       }
     },
-    "/api/likes/66ed15e845074820f1a7b826": {
+    "/api/likes/{postId}": {
       "get": {
         "tags": ["Likes"],
         "summary": "Get Likes",
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -390,13 +494,23 @@
         }
       }
     },
-    "/api/likes/toggle/66ed15e845074820f1a7b826": {
+    "/api/likes/toggle/{postId}": {
       "post": {
         "tags": ["Likes"],
         "summary": "Toggle Like",
         "requestBody": {
           "content": {}
         },
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -407,10 +521,20 @@
         }
       }
     },
-    "/api/friends/get-friends/66edb7aac08fa65b416b23f1": {
+    "/api/friends/get-friends/{userId}": {
       "get": {
         "tags": ["Friendship"],
         "summary": "Get Friends",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -435,7 +559,7 @@
         }
       }
     },
-    "/api/friends/toggle-friendship/66edd3a0677090467805cbb3": {
+    "/api/friends/toggle-friendship/{friendsId}": {
       "post": {
         "tags": ["Friendship"],
         "summary": "Toggle Friendship",
@@ -445,12 +569,22 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "status": "request"
+                  "status": "request or cancel"
                 }
               }
             }
           }
         },
+        "parameters": [
+          {
+            "name": "friendsId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -461,7 +595,7 @@
         }
       }
     },
-    "/api/friends/response-to-request/66e88343716e97a39c2c3dbb": {
+    "/api/friends/response-to-request/{friendsId}": {
       "post": {
         "tags": ["Friendship"],
         "summary": "Respond to Friend Request",
@@ -471,12 +605,22 @@
               "schema": {
                 "type": "object",
                 "example": {
-                  "status": "confirm"
+                  "status": "confirm or delete"
                 }
               }
             }
           }
         },
+        "parameters": [
+          {
+            "name": "friendsId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -524,7 +668,7 @@
                 "type": "object",
                 "example": {
                   "email": "jitmaity9@gmail.com",
-                  "otp": 818939
+                  "otp": 292183
                 }
               }
             }
@@ -551,8 +695,78 @@
                 "type": "object",
                 "example": {
                   "email": "jitmaity9@gmail.com",
-                  "otp": 834996,
+                  "otp": 292183,
                   "newPassword": "1234"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/send-email": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Send OTP (Email)",
+        "requestBody": {
+          "content": {}
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/verify-email": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Verify OTP (Email)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "otp": 899289
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/otp/change-email": {
+      "post": {
+        "tags": ["OTP"],
+        "summary": "Change Email (Email)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "example": {
+                  "otp": 899289,
+                  "newEmail": "jitmaity99@gmail.com"
                 }
               }
             }

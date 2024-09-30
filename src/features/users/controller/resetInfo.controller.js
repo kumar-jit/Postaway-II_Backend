@@ -1,11 +1,26 @@
 import { ErrorHandler } from "../../../utils/errorHandler.js";
 import sendMail from "../../../utils/email/mailSender.js";
-import { getUserByEmailRepository } from '../../users/model/user.repository.js';
+import { getUserByEmailRepository, getUserByIdRepository, updateUserRepository } from '../../users/model/user.repository.js';
 import { saveOTPRepository, updateUserPasswordRepository } from "../model/resetInfo.repository.js";
 
 
-export const sendOTP = async(req,res,next) => {
+export const sendOtpForPasswordRest = async ( req, res, next) => {
+    await sendOTP(req, res, next, "password");
+}
+export const sendOtpForEmailChange = async ( req, res, next) => {
+    req.body.email = req.user.email;    // adding email to req body
+    await sendOTP(req, res, next, "email");
+}
 
+export const verifyOtpForEmail = async (req, res, next) =>{
+    req.body.email = req.user.email;    // adding email to req body
+    await verifyOTP(req,res,next, "email");
+}
+export const verifyOtpForPassword = async (req, res, next) => {
+    await verifyOTP(req,res,next, "password");
+}
+
+const sendOTP = async(req,res,next, actionType) => {
     try{
         const email = req.body.email;
 
@@ -15,20 +30,22 @@ export const sendOTP = async(req,res,next) => {
         const user = await getUserByEmailRepository(email,true);
         if(!user) return next(new ErrorHandler(404,"No user found with this email. Please sign up."));
 
-        const updatedUser = await saveOTPRepository(user);
+        const updatedUser = await saveOTPRepository(user, actionType);
         if(!updatedUser) return next(new ErrorHandler(500,"Something went wrong. Please try again later."));
 
-        sendMail(updatedUser.name, updatedUser.email, updatedUser.otp, "password");
+        // fetching otp
+        let otp = (actionType == "email")? updatedUser.otpEmail : updatedUser.otp;
+
+        sendMail(updatedUser.name, updatedUser.email, otp, actionType);
 
         return res.status(200).send({status:true,msg:"Please check your email for the OTP"})
     }
     catch(error){
         next(error);
     }
-
 }
 
-export const verifyOTP = async(req,res,next) => {
+const verifyOTP = async(req,res,next, actionType) => {
     try {
         const { email, otp } = req.body;
         
@@ -38,14 +55,24 @@ export const verifyOTP = async(req,res,next) => {
         // Fetch OTP and expiry from the repository
         const user = await getUserByEmailRepository(email,true);
         if (!user) return next(new ErrorHandler(404, "User not found"));
-    
-        // Check if OTP matches
-        if (user.otp != otp) return next(new ErrorHandler(400, "Invalid OTP"));
-    
-        // Check if OTP has expired
-        const currentTime = new Date();
-        if (user.otpExpiry < currentTime) return next(new ErrorHandler(400, "OTP has expired"));
-    
+
+        if(actionType == "email"){
+            // Check if OTP matches
+            if (user.otpEmail != otp) return next(new ErrorHandler(400, "Invalid OTP"));
+        
+            // Check if OTP has expired
+            const currentTime = new Date();
+            if (user.otpEmailExpiry < currentTime) return next(new ErrorHandler(400, "OTP has expired"));
+        }
+        else{
+            // Check if OTP matches
+            if (user.otp != otp) return next(new ErrorHandler(400, "Invalid OTP"));
+        
+            // Check if OTP has expired
+            const currentTime = new Date();
+            if (user.otpExpiry < currentTime) return next(new ErrorHandler(400, "OTP has expired"));
+        }
+        
         return res.status(200).json({ message: "OTP verified successfully" });
     } catch (error) {
         next(error);
@@ -82,9 +109,21 @@ export const resetPassword = async(req,res,next) => {
       }
 }
 
-export const sendOtpForEmail = async (req,res,next) => {
-    
-}
 export const changeEmail = async(req,res,next) => {
-    
+    try {
+        const newEmail = req.body.newEmail;
+        const userId = req.user._id.toString();
+
+        if(!userId) return next(new ErrorHandler(403, "Please login again"))
+        if(!newEmail) return next(new ErrorHandler(400, "Email is required"));
+
+        const updatedUser = await updateUserRepository(userId, {email: newEmail});
+
+        if(!updatedUser) return next(new ErrorHandler(404, "User not found"));
+
+        res.status(200).json({ message: "Email change successfully" });
+    }
+    catch(error) {
+        next(error);
+    }
 }
