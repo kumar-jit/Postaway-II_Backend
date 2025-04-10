@@ -1,4 +1,4 @@
-import authenticateURL from "../../../middlewares/jwtAuthorizationMiddleware.js";
+ import authenticateURL from "../../../middlewares/jwtAuthorizationMiddleware.js";
 import express from "express";
 
 import { getAllcomments, addComment, deleteComment, updateComment } from "../controller/comments.controller.js";

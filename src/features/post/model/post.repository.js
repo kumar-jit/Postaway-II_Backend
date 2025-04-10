@@ -8,7 +8,7 @@ export const getAllPostsRepository = async () => {
     return await postModel.find(); 
 }
 
-// need to change later
+
 export const getPostByIdRepository = async (postId) => {
     return await postModel.findById(postId).populate({path:'owner', select: 'name email avatar'});
 }
